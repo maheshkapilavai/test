@@ -12,6 +12,7 @@ class TestDemo implements Serializable{
 	 int b= 20;
 	 transient String psw ="mahesh";
 	 transient int pin=12345;
+	 
 	 private void writeObject(ObjectOutputStream os) throws Exception {
 		 os.defaultWriteObject();
 		  String epsw="123"+psw;
@@ -31,10 +32,12 @@ public class SerialazationTest {
 
 	public static void main(String[] args) throws Exception {
 		TestDemo td =new TestDemo();
+		
 		System.out.println(td.a+" "+td.b+" "+td.psw+" "+td.pin);
 		FileOutputStream fos =new FileOutputStream("abc.ser");
 		ObjectOutputStream oos =new ObjectOutputStream(fos);
 		oos.writeObject(td);
+		
 		FileInputStream fis =new FileInputStream("abc.ser");
 		ObjectInputStream ois =new ObjectInputStream(fis);
 		TestDemo td1=(TestDemo) ois.readObject();
